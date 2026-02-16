@@ -1,51 +1,68 @@
-# Introduction to GitHub
+# Kalkulator palety (wysokość + masa)
 
-_Get started using GitHub in less than an hour._
+Prosta aplikacja CLI w Pythonie do planowania ułożenia kartonów na palecie.
 
-## Welcome
+## Co robi aplikacja
 
-People use GitHub to build some of the most advanced technologies in the world. Whether you’re visualizing data or building a new game, there’s a whole community and set of tools on GitHub that can help you do it even better. GitHub Skills’ “Introduction to GitHub” exercise guides you through everything you need to start contributing in less than an hour.
+- bierze listę kartonów i ich ilości,
+- układa kartony warstwami na wybranej palecie (kartony zawsze leżą na płasko),
+- liczy łączną wysokość palety,
+- po uzupełnieniu wag kartonów liczy też masę całkowitą palety.
 
-- **Who is this for**: New developers, new GitHub users, and students.
-- **What you'll learn**: We'll introduce repositories, branches, commits, and pull requests.
-- **What you'll build**: We'll make a short Markdown file you can use as your [profile README](https://docs.github.com/account-and-profile/setting-up-and-managing-your-github-profile/customizing-your-profile/managing-your-profile-readme).
-- **Prerequisites**: None. This exercise is a great introduction for your first day on GitHub.
-- **How long**: This exercise takes less than one hour to complete.
+## Dane startowe
 
-In this exercise, you will:
+### Kartony
 
-1. Create a branch
-2. Commit a file
-3. Open a pull request
-4. Merge your pull request
+- `KARTON L` – 50x60x27 cm
+- `KARTON GRATIA` – 50x47x20 cm
+- `KARTON OLYMPIA` – 50x60x27 cm
+- `KARTON GAIA` – 30x39x20 cm
+- `KARTON GAIA MINI` – 29x30x20 cm
+- `KARTON SCULPTOR` – 65x19x19 cm
+- `AKCESORIA` – 30x50x20 cm
 
-### How to start this exercise
+### Palety
 
-1. Right-click **Copy Exercise** and open the link in a new tab.
+- `80x120`
+- `100x120`
+- `80x60`
 
-   <a id="copy-exercise">
-      <img src="https://img.shields.io/badge/📠_Copy_Exercise-AAA" height="25pt"/>
-   </a>
+## Uruchomienie
 
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.chttps://github.com/LaskaKing94/skills-introduction-to-github/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
+```bash
+python pallet_calculator.py list
+```
 
-3. After your new repository is created, wait about 20 seconds for the exercise to be prepared and buttons updated. You will continue working from your copy of the exercise.
-   - The **Copy Exercise** button will deactivate, changing to gray.
-   - The **Start Exercise** button will activate, changing to green.
-   - You will likely need to refresh the page.
+## Ustawienie wag kartonów (zapisywane do bazy JSON)
 
-4. Click **Start Exercise**. Follow the step-by-step instructions and feedback will be provided as you progress.
+```bash
+python pallet_calculator.py set-weight "KARTON L" 18.5
+python pallet_calculator.py set-weight "KARTON GAIA" 9.2
+```
 
-   <a id="start-exercise" href="https://github.com/LaskaKing94/skills-introduction-to-github/issues/1">
-      <img src="https://img.shields.io/badge/🚀_Start_Exercise-008000" height="25pt"/>
-   </a>
+Wagi zapisywane są w pliku `carton_catalog.json`.
 
-> [!IMPORTANT]
-> The **Start Exercise** button will activate after copying the repository. You will probably need to refresh the page.
+## Obliczenie wysokości i masy palety
 
----
+```bash
+python pallet_calculator.py calculate \
+  --pallet 80x120 \
+  --item "KARTON L=4" \
+  --item "KARTON GAIA=6" \
+  --item "AKCESORIA=2" \
+  --pallet-base-height 14 \
+  --pallet-tare 25
+```
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+### Wynik
+
+Program pokaże:
+
+- liczbę warstw,
+- wysokość każdej warstwy,
+- wysokość całkowitą palety,
+- masę całkowitą (jeśli każda użyta pozycja ma wpisaną wagę).
+
+## Uwaga praktyczna
+
+Algorytm używa heurystyki pakowania 2D (obrót kartonu tylko w płaszczyźnie podstawy). Daje dobry, szybki wynik operacyjny, ale nie gwarantuje matematycznie idealnego optimum dla każdego zestawu.

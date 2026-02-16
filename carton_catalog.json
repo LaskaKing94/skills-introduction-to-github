@@ -1,0 +1,51 @@
+[
+  {
+    "name": "AKCESORIA",
+    "length": 30,
+    "width": 50,
+    "height": 20,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON GAIA",
+    "length": 30,
+    "width": 39,
+    "height": 20,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON GAIA MINI",
+    "length": 29,
+    "width": 30,
+    "height": 20,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON GRATIA",
+    "length": 50,
+    "width": 47,
+    "height": 20,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON L",
+    "length": 50,
+    "width": 60,
+    "height": 27,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON OLYMPIA",
+    "length": 50,
+    "width": 60,
+    "height": 27,
+    "weight_kg": null
+  },
+  {
+    "name": "KARTON SCULPTOR",
+    "length": 65,
+    "width": 19,
+    "height": 19,
+    "weight_kg": null
+  }
+]
